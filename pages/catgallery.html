@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>CatGallery (TheCatAPI)</title>
+</head>
+
+<body>
+  <div class="catApp" id="catApp">
+    <header class="catHeader">
+      <a class="catBack" href="../index.html">← Volver</a>
+      <h1 class="catTitle">CatGallery</h1>
+
+      <nav class="catTabs" aria-label="Secciones">
+        <button class="catTab is-active" id="catTabGallery" type="button">Galería</button>
+        <button class="catTab" id="catTabFavs" type="button">
+          Favoritos <span class="catBadge" id="catFavCount">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <section class="catPanel">
+      <div class="catControls">
+        <div class="catGroup">
+          <label class="catLabel" for="catLimit">Cantidad</label>
+          <select class="catSelect" id="catLimit">
+            <option value="6">6</option>
+            <option value="9" selected>9</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+
+        <div class="catGroup">
+          <label class="catLabel" for="catType">Tipo</label>
+          <select class="catSelect" id="catType">
+            <option value="">Cualquiera</option>
+            <option value="jpg,png">JPG/PNG</option>
+            <option value="gif">GIF</option>
+          </select>
+        </div>
+
+        <div class="catGroup">
+          <button class="catBtn" id="catBtnReload" type="button">Recargar</button>
+          <button class="catBtn catBtnDanger" id="catBtnClearFavs" type="button" title="Borra todos los favoritos">
+            Vaciar favoritos
+          </button>
+        </div>
+      </div>
+
+      <div class="catStatusRow">
+        <div class="catStatus" id="catStatus" aria-live="polite">Listo.</div>
+        <div class="catHint">Tip: pulsa ❤️ para guardar en favoritos.</div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <main class="catMain" id="catViewGallery">
+      <div class="catGrid" id="catGrid" aria-label="Galería de gatos"></div>
+
+      <div class="catFooter">
+        <button class="catBtn catBtnPrimary" id="catBtnMore" type="button">Ver más</button>
+      </div>
+    </main>
+
+    <!-- FAVORITOS -->
+    <main class="catMain is-hidden" id="catViewFavs">
+      <div class="catGrid" id="catFavGrid" aria-label="Favoritos"></div>
+
+      <div class="catFooter">
+        <button class="catBtn" id="catBtnBackToGallery" type="button">Volver a galería</button>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="../js/catgallery.js"></script>
+</body>
+</html>

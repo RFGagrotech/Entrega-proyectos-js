@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Sudoku (solver)</title>
+</head>
+
+<body>
+  <div class="sudokuApp" id="sudokuApp">
+    <div class="sudokuCard">
+      <header class="sudokuHeader">
+        <a class="sudokuBack" href="../index.html">← Volver</a>
+        <h1 class="sudokuTitle">Sudoku (Sudoku Solver)</h1>
+        <span class="sudokuMuted">Backtracking + validación</span>
+      </header>
+
+      <div class="sudokuControls">
+        <div class="sudokuGroup">
+          <label class="sudokuLabel" for="sudokuMode">Modo:</label>
+          <select id="sudokuMode" class="sudokuSelect">
+            <option value="empty">Vacío (rellenar a mano)</option>
+            <option value="example">Ejemplo (precargado)</option>
+          </select>
+        </div>
+
+        <div class="sudokuGroup">
+          <button class="sudokuBtn" id="sudokuBtnLoad" type="button">Cargar</button>
+          <button class="sudokuBtn sudokuBtnDanger" id="sudokuBtnClear" type="button">Limpiar</button>
+        </div>
+
+        <div class="sudokuGroup">
+          <button class="sudokuBtn" id="sudokuBtnValidate" type="button">Validar</button>
+          <button class="sudokuBtn sudokuBtnPrimary" id="sudokuBtnSolve" type="button">Resolver</button>
+        </div>
+      </div>
+
+      <div class="sudokuGridWrap">
+        <div id="sudokuBoard" class="sudokuBoard" aria-label="Tablero Sudoku 9x9"></div>
+
+        <div class="sudokuRow">
+          <div class="sudokuMuted">
+            Entrada: 1–9 o vacío. Navegación:
+            <span class="sudokuKbd">←</span><span class="sudokuKbd">→</span><span class="sudokuKbd">↑</span><span class="sudokuKbd">↓</span>
+          </div>
+          <div id="sudokuStats" class="sudokuMuted">—</div>
+        </div>
+
+        <div id="sudokuMessage" class="sudokuMessage">
+          Listo. Elige modo y pulsa <b>Cargar</b>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../js/sudoku.js"></script>
+</body>
+</html>

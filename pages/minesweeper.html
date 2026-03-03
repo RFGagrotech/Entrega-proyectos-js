@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscaminas (minesweeper)</title>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <a href="../index.html">← Volver</a>
+            <h1>Buscaminas (Minesweeper)</h1>
+            <span class="pill"> Click derecho: <strong>Bandera</strong></span>
+        </header>
+
+        <section class="panel">
+            <div class="controls">
+                <label>Dificultad
+                    <select id="difficulty">
+                    <option value="custom" selected>Personalizado</option>
+                    <option value="easy">Fácil (8×8, 10)</option>
+                    <option value="medium">Medio (12×12, 30)</option>
+                    <option value="hard">Difícil (16×16, 50)</option>
+                    </select>
+                </label>
+
+                <label>Filas
+                    <input id="rows" type="number" min="4" max="40" value="8" />
+                </label>
+
+                <label>Columnas
+                    <input id="cols" type="number" min="4" max="60" value="8" />
+                </label>
+
+                <label>Minas
+                    <input id="mines" type="number" min="1" value="10" />
+                </label>
+
+                <button id="btnNew">Crear / Reiniciar</button>
+            </div>
+
+            <div class="stats">
+              <div class="pill">⛳ Minas: <strong id="minesTotal">0</strong></div>
+              <div class="pill">🚩 Banderas: <strong id="flagsCount">0</strong></div>
+              <div class="pill">⏱️ Tiempo: <strong id="time">0</strong>s</div>
+              <div class="pill">🏆 Mejor: <strong id="bestTime">—</strong></div>
+            </div>
+        </section>
+        <p class="msg" id="message">Configura el tablero y pulsa <b>Crear / Reiniciar</b></p>
+
+        <div class="boardWrap">
+            <div id="board" class="board" aria-label="Tablero de buscaminas"></div>
+        </div>
+
+        <div class="legend">
+          <span>Objetivo: descubre todas las celdas sin mina.</span>
+        </div>
+    </div>
+    <script type="module" src="../js/minesweeper.js"></script>
+</body>
+</html>

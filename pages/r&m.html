@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick & Morty Explorer</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <div class="rme-app" id="rmeApp">
+      <header class="rme-header">
+        <div class="rme-header__inner">
+          <div class="rme-brand">
+            <div class="rme-brand__logo" aria-hidden="true">R&M</div>
+            <div class="rme-brand__text">
+              <h1 class="rme-brand__title">Rick & Morty Explorer</h1>
+              <p class="rme-brand__subtitle">Personajes, episodios y localizaciones</p>
+            </div>
+          </div>
+
+          <nav class="rme-tabs" aria-label="Secciones">
+            <button class="rme-tab rme-tab--active" type="button" data-rme-tab="characters">
+              Personajes
+            </button>
+            <button class="rme-tab" type="button" data-rme-tab="episodes">
+              Episodios
+            </button>
+            <button class="rme-tab" type="button" data-rme-tab="locations">
+              Localizaciones
+            </button>
+            <button class="rme-tab" type="button" data-rme-tab="favorites">
+              Favoritos
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="rme-main">
+        <!-- Toolbar / Filtros -->
+        <section class="rme-toolbar" aria-label="Búsqueda y filtros">
+          <form class="rme-form" id="rmeForm" autocomplete="off">
+            <div class="rme-field">
+              <label class="rme-label" for="rmeQuery">Buscar</label>
+              <input
+                class="rme-input"
+                id="rmeQuery"
+                name="q"
+                type="search"
+                placeholder="Nombre (personaje / episodio / localización)"
+              />
+            </div>
+
+            <!-- Filtros (solo se usan en Personajes) -->
+            <div class="rme-field rme-field--status" data-rme-only="characters">
+              <label class="rme-label" for="rmeStatus">Estado</label>
+              <select class="rme-select" id="rmeStatus" name="status">
+                <option value="">Todos</option>
+                <option value="alive">Alive</option>
+                <option value="dead">Dead</option>
+                <option value="unknown">Unknown</option>
+              </select>
+            </div>
+
+            <div class="rme-field rme-field--species" data-rme-only="characters">
+              <label class="rme-label" for="rmeSpecies">Especie</label>
+              <input class="rme-input" id="rmeSpecies" name="species" type="text" placeholder="Human, Alien..." />
+            </div>
+
+            <div class="rme-actions">
+              <button class="rme-btn rme-btn--primary" type="submit" id="rmeBtnSearch">
+                Buscar
+              </button>
+              <button class="rme-btn" type="button" id="rmeBtnReset">
+                Limpiar
+              </button>
+            </div>
+          </form>
+
+          <div class="rme-meta" aria-live="polite">
+            <span id="rmeCount">—</span>
+            <span class="rme-sep">•</span>
+            <span id="rmePage">—</span>
+          </div>
+        </section>
+
+        <!-- Estados -->
+        <section class="rme-state">
+          <div class="rme-loading rme-hidden" id="rmeLoading" role="status" aria-live="polite">
+            <div class="rme-spinner" aria-hidden="true"></div>
+            <span>Cargando…</span>
+          </div>
+          <div class="rme-error rme-hidden" id="rmeError" role="alert"></div>
+        </section>
+
+        <section class="rme-grid" id="rmeGrid" aria-label="Resultados"></section>
+
+        <section class="rme-pagination" aria-label="Paginación">
+          <button class="rme-btn" type="button" id="rmePrev">Anterior</button>
+          <button class="rme-btn rme-btn--primary" type="button" id="rmeNext">Siguiente</button>
+          <button class="rme-btn rme-btn--ghost" type="button" id="rmeLoadMore">Cargar más</button>
+        </section>
+      </main>
+
+      <aside class="rme-drawer rme-hidden" id="rmeDrawer" aria-hidden="true">
+        <div class="rme-drawer__backdrop" id="rmeDrawerBackdrop"></div>
+
+        <div class="rme-drawer__panel" role="dialog" aria-modal="true" aria-label="Detalle">
+          <header class="rme-drawer__header">
+            <h2 class="rme-drawer__title" id="rmeDrawerTitle">Detalle</h2>
+            <button class="rme-iconbtn" type="button" id="rmeDrawerClose" aria-label="Cerrar detalle">✕</button>
+          </header>
+
+          <div class="rme-drawer__content" id="rmeDrawerContent"></div>
+        </div>
+      </aside>
+
+      <footer class="rme-footer">
+        <small>
+          Datos: API pública de Rick and Morty • Proyecto JS (fetch + filtros + paginación + favoritos)
+        </small>
+      </footer>
+    </div>
+
+    <script src=../js/rickandmorty.js"></script>
+  </body>
+</html>
