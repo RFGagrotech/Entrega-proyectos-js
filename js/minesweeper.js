@@ -17,11 +17,11 @@ let bestTimeEl = $("#bestTime");
 let game = null;
 let timerId = null;
 
-//Creo la funcion para crear la partida 
+//la funcion para crear la partida 
 function createGame(rows, cols, mines) {
   let maxMines = rows * cols - 1; 
   let safeMines = Math.max(1, Math.min(mines, maxMines)); //
-  //Creo el panel (matriz) como un grid
+  //el panel (matriz) como un grid
   let grid = Array.from({ length: rows }, (_, r) =>
     Array.from({ length: cols }, (_, c) => ({
       r, c, 
