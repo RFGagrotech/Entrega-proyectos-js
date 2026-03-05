@@ -86,6 +86,20 @@
     return res.json();
   }
 
+  function idFromUrl(u) {
+  let s = String(u || "");
+  let parts = s.split("/").filter(Boolean);
+  let last = parts[parts.length - 1];
+  let n = Number(last);
+  return Number.isFinite(n) ? n : null;
+  }
+
+  function coverFromRefs(refs) {
+  if (!Array.isArray(refs) || refs.length === 0) return null;
+  let id = idFromUrl(refs[0]);
+  return id ? `${API}/character/avatar/${id}.jpeg` : null;
+}
+
   let state = {
     tab: "characters", // characters | episodes | locations | favorites
     query: "",
@@ -305,62 +319,74 @@
     `;
   }
 
-  function renderEpisodeCard(e) {
-    let fav = isFav("episodes", e.id);
-    return `
-      <article class="rme-card" data-rme-type="episodes" data-rme-id="${e.id}">
-        <div class="rme-card__media" aria-hidden="true">
-          <div style="width:100%;height:100%;display:grid;place-items:center;padding:12px;">
-            <div style="text-align:center;">
-              <div style="font-weight:900;font-size:18px;letter-spacing:0.5px;">${safeText(e.episode)}</div>
-              <div style="color:rgba(231,238,252,0.7);font-size:12px;margin-top:6px;">${safeText(e.air_date)}</div>
-            </div>
-          </div>
-        </div>
-        <div class="rme-card__body">
-          <h3 class="rme-card__title">${safeText(e.name)}</h3>
-          <p class="rme-card__sub">${safeText(e.episode)} • ${safeText(e.air_date)}</p>
-          <div class="rme-badges">
-            <span class="rme-badge">${(e.characters?.length ?? 0)} personajes</span>
-          </div>
-          <div class="rme-card__actions">
-            <button class="rme-btn rme-btn--primary" type="button" data-rme-action="open">Ver detalle</button>
-            <button class="rme-iconbtn" type="button" data-rme-action="fav" aria-label="Favorito">
-              ${favIconHtml(fav)}
-            </button>
-          </div>
-        </div>
-      </article>
-    `;
-  }
+function renderEpisodeCard(e) {
+  let fav = isFav("episodes", e.id);
+  let cover = coverFromRefs(e.characters);
 
-  function renderLocationCard(l) {
-    let fav = isFav("locations", l.id);
-    return `
-      <article class="rme-card" data-rme-type="locations" data-rme-id="${l.id}">
-        <div class="rme-card__media" aria-hidden="true">
-          <div style="width:100%;height:100%;display:grid;place-items:center;padding:12px;">
-            <div style="text-align:center;">
-              <div style="font-weight:900;font-size:16px;">${safeText(l.type) || "Location"}</div>
-              <div style="color:rgba(231,238,252,0.7);font-size:12px;margin-top:6px;">${safeText(l.dimension) || "—"}</div>
-            </div>
-          </div>
+  return `
+    <article class="rme-card" data-rme-type="episodes" data-rme-id="${e.id}">
+      <div class="rme-card__media" aria-hidden="true">
+        ${
+          cover
+            ? `<img src="${cover}" alt="" loading="lazy" />`
+            : `<div style="width:100%;height:100%;display:grid;place-items:center;padding:12px;">
+                 <div style="text-align:center;">
+                   <div style="font-weight:900;font-size:18px;letter-spacing:0.5px;">${safeText(e.episode)}</div>
+                   <div style="color:rgba(231,238,252,0.7);font-size:12px;margin-top:6px;">${safeText(e.air_date)}</div>
+                 </div>
+               </div>`
+        }
+      </div>
+      <div class="rme-card__body">
+        <h3 class="rme-card__title">${safeText(e.name)}</h3>
+        <p class="rme-card__sub">${safeText(e.episode)} • ${safeText(e.air_date)}</p>
+        <div class="rme-badges">
+          <span class="rme-badge">${(e.characters?.length ?? 0)} personajes</span>
         </div>
-        <div class="rme-card__body">
-          <h3 class="rme-card__title">${safeText(l.name)}</h3>
-          <p class="rme-card__sub">${safeText(l.type)} • ${safeText(l.dimension)}</p>
-          <div class="rme-badges">
-            <span class="rme-badge">${(l.residents?.length ?? 0)} residentes</span>
-          </div>
-          <div class="rme-card__actions">
-            <button class="rme-btn rme-btn--primary" type="button" data-rme-action="open">Ver detalle</button>
-            <button class="rme-iconbtn" type="button" data-rme-action="fav" aria-label="Favorito">
-              ${favIconHtml(fav)}
-            </button>
-          </div>
+        <div class="rme-card__actions">
+          <button class="rme-btn rme-btn--primary" type="button" data-rme-action="open">Ver detalle</button>
+          <button class="rme-iconbtn" type="button" data-rme-action="fav" aria-label="Favorito">
+            ${favIconHtml(fav)}
+          </button>
         </div>
-      </article>
-    `;
+      </div>
+    </article>
+  `;
+}
+
+function renderLocationCard(l) {
+  let fav = isFav("locations", l.id);
+  let cover = coverFromRefs(l.residents);
+
+  return `
+    <article class="rme-card" data-rme-type="locations" data-rme-id="${l.id}">
+      <div class="rme-card__media" aria-hidden="true">
+        ${
+          cover
+            ? `<img src="${cover}" alt="" loading="lazy" />`
+            : `<div style="width:100%;height:100%;display:grid;place-items:center;padding:12px;">
+                 <div style="text-align:center;">
+                   <div style="font-weight:900;font-size:16px;">${safeText(l.type) || "Location"}</div>
+                   <div style="color:rgba(231,238,252,0.7);font-size:12px;margin-top:6px;">${safeText(l.dimension) || "—"}</div>
+                 </div>
+               </div>`
+        }
+      </div>
+      <div class="rme-card__body">
+        <h3 class="rme-card__title">${safeText(l.name)}</h3>
+        <p class="rme-card__sub">${safeText(l.type)} • ${safeText(l.dimension)}</p>
+        <div class="rme-badges">
+          <span class="rme-badge">${(l.residents?.length ?? 0)} residentes</span>
+        </div>
+        <div class="rme-card__actions">
+          <button class="rme-btn rme-btn--primary" type="button" data-rme-action="open">Ver detalle</button>
+          <button class="rme-iconbtn" type="button" data-rme-action="fav" aria-label="Favorito">
+            ${favIconHtml(fav)}
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
   }
 
   function wireCardEvents(type) {
