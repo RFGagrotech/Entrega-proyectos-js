@@ -9,8 +9,6 @@ $rme-accent: #6ee7ff;
 $rme-accent-2: #a7f3d0;
 $rme-danger: #ff5b6e;
 
-* { box-sizing: border-box; }
-
 .page-rme {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
@@ -34,6 +32,24 @@ $rme-danger: #ff5b6e;
   background: rgba(11, 18, 32, 0.72);
   border-bottom: 1px solid $rme-line;
 }
+
+.rme-brand__text {
+  display: grid;
+  gap: 6px;
+}
+
+.rme-brand__text a{
+   color:#9ca3af;
+   text-decoration:none;
+   border:1px solid #334155;
+   padding:8px 10px;
+   border-radius:10px;
+ }
+
+ .rme-brand__text a:hover{
+   border-color:#475569;
+   color:#e5e7eb
+ }
 
 .rme-header__inner {
   max-width: 1100px;
