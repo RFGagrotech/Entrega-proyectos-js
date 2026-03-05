@@ -48,7 +48,7 @@
     else arr.push(id);
     favs[type] = arr;
     writeFavs(favs);
-    return idx < 0; // true = añadido
+    return idx < 0; 
   }
 
   function setLoading(on) {
@@ -142,7 +142,6 @@
     // UI tabs
     els.tabs.forEach((b) => b.classList.toggle("rme-tab--active", b.dataset.rmeTab === newTab));
 
-    // Mostrar/ocultar filtros exclusivos de personajes
     let showCharFilters = newTab === "characters";
     els.onlyCharactersFields.forEach((node) => (node.style.display = showCharFilters ? "" : "none"));
 
@@ -184,7 +183,6 @@
     if (state.tab === "episodes") {
       let params = new URLSearchParams();
       if (q) {
-        // Si meten S01E01, lo dejamos como name igualmente (la API tiene filtro por "episode" también, pero sin liarnos)
         params.set("name", q);
       }
       params.set("page", String(p));
@@ -208,7 +206,6 @@
     try {
       let url = buildEndpoint();
       let data = await apiGet(url);
-
       state.info = data.info || null;
       let results = Array.isArray(data.results) ? data.results : [];
       if (replace) state.items = results;
@@ -247,7 +244,6 @@
     els.btnPrev.disabled = state.tab === "favorites" || !hasPrev;
     els.btnNext.disabled = state.tab === "favorites" || !hasNext;
 
-    // "Cargar más" solo cuando hay next y no estamos en favoritos
     els.btnLoadMore.disabled = state.tab === "favorites" || !hasNext;
     els.btnLoadMore.style.display = state.tab === "favorites" ? "none" : "";
   }
@@ -662,7 +658,6 @@ function renderLocationCard(l) {
     let q = state.query.trim().toLowerCase();
 
     try {
-      // Cargamos por IDs (batch simple). Si no hay, mostramos tarjeta.
       let chunks = [];
       let charIds = favs.characters.slice().sort((a, b) => a - b);
       let epiIds = favs.episodes.slice().sort((a, b) => a - b);

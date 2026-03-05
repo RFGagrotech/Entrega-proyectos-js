@@ -1,4 +1,3 @@
-// catgallery.js (TheCatAPI) - aislado
 let $ = (sel) => document.querySelector(sel);
 let tabGallery = $("#catTabGallery");
 let tabFavs = $("#catTabFavs");
@@ -15,10 +14,7 @@ let btnMore = $("#catBtnMore");
 let btnClearFavs = $("#catBtnClearFavs");
 let btnBackToGallery = $("#catBtnBackToGallery");
 
-// --- Config API ---
-// Nota: TheCatAPI funciona sin key, pero con rate-limit más estricto.
-// Si tienes API KEY, ponla aquí:
-let API_KEY = ""; // "TU_API_KEY";
+let API_KEY = ""; 
 let API_BASE = "https://api.thecatapi.com/v1/images/search";
 
 let LS_FAVS = "cb_cat_favs_v1";
@@ -27,7 +23,6 @@ let page = 0;
 let loading = false;
 
 function setStatus(text, kind = "info") {
-  // kind: info | ok | error | loading
   if (kind === "error") statusEl.textContent = `⚠️ ${text}`;
   else if (kind === "ok") statusEl.textContent = `✅ ${text}`;
   else if (kind === "loading") statusEl.textContent = `⏳ ${text}`;
@@ -78,7 +73,6 @@ function toggleFav(cat) {
 }
 
 function paintFavButtonsState() {
-  // Actualiza el estado visual de los botones ❤️ en la galería
   gridEl.querySelectorAll("[data-fav-btn]").forEach((btn) => {
     let id = btn.getAttribute("data-id");
     let fav = isFav(id);
@@ -193,7 +187,6 @@ function paintFavs() {
   }
 
   favs.forEach((cat) => {
-    // En favoritos, el botón sirve para quitar
     let card = document.createElement("article");
     card.className = "catCard";
 

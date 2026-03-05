@@ -88,7 +88,7 @@ function buildGrid() {
           return;
         }
 
-        // Si es "given", no se cambia
+        // Si es "given", no se cambia.
         if (givenMask[r][c]) {
           e.target.value = String(getBoardFromUI()[r][c] || "");
           return;
@@ -100,7 +100,7 @@ function buildGrid() {
         updateStats();
       });
 
-      // Navegación con flechas
+      // Navegación con flechas.
       input.addEventListener("keydown", (e) => {
         let key = e.key;
         if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(key)) return;

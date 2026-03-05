@@ -293,7 +293,7 @@ function onRightClick(r, c) {
   let cell = game.grid[r][c];
   if (cell.revealed) return;
 
-  // No arrancamos el timer con click derecho (decisión típica y cómoda para entrega)
+  // No arrancamos el timer con click derecho
   cell.flagged = !cell.flagged;
   game.flagsCount += cell.flagged ? 1 : -1;
 
