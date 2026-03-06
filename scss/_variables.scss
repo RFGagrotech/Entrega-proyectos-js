@@ -1,0 +1,28 @@
+
+:root {
+//Variables minesweeper
+  --bg:#0f172a; 
+  --card:#111827;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:#334155;
+  --cell:#1f2937;
+  --cell2:#0b1220;
+  --danger:#ef4444;
+  --ok:#22c55e;
+  --warn:#f59e0b;
+//Variables para R&M
+  --rme-bg: #0b1220;
+  --rme-panel: #0f1b31;
+  --rme-panel-2: #12203a;
+  --rme-text: #e7eefc;
+  --rme-muted: rgba(231, 238, 252, 0.7);
+  --rme-line: rgba(231, 238, 252, 0.12);
+  --rme-accent: #6ee7ff;
+  --rme-accent-2: #a7f3d0;
+  --rme-danger: #ff5b6e;
+}
+
+* { //Única propiedad de _reset.scss, la dejo aquí
+  box-sizing:border-box
+}
